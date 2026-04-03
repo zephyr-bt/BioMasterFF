@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS | Elite Bio Protocol</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Immersive Background -->
+    <div class="cyber-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <header class="nexus-header">
+        <div class="brand">
+            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span>NEXUS <span class="badge">PRO</span></span>
+        </div>
+    </header>
+
+    <main class="nexus-workspace">
+        <!-- Core Feature: The Live Studio -->
+        <section class="studio-section glass-panel">
+            <div class="panel-header">
+                <h2>Bio Code Studio</h2>
+                <p>Inject hex codes and modifiers for real-time game rendering.</p>
+            </div>
+            
+            <div class="studio-grid">
+                <!-- Input Area -->
+                <div class="editor-area">
+                    <div class="toolbar">
+                        <button class="tool-btn" data-inject="[b]" title="Bold">B</button>
+                        <button class="tool-btn" data-inject="[i]" title="Italic">I</button>
+                        <button class="tool-btn" data-inject="[c]" title="Center">C</button>
+                        <div class="divider"></div>
+                        <button class="tool-btn color-btn" data-inject="[00FFFF]" style="color: #00FFFF;">Cyan</button>
+                        <button class="tool-btn color-btn" data-inject="[FF0000]" style="color: #FF0000;">Red</button>
+                        <button class="tool-btn color-btn" data-inject="[FFD700]" style="color: #FFD700;">Gold</button>
+                    </div>
+                    <textarea id="bio-input" placeholder="e.g., [b][c][00FFFF]ESPORTS PLAYER&#10;[FF0000]100% HEADSHOT"></textarea>
+                </div>
+
+                <!-- Output Area -->
+                <div class="render-area">
+                    <div class="render-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" width="16"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                        <span>Live Engine Preview</span>
+                    </div>
+                    <div class="game-display">
+                        <div id="live-preview">Your output will appear here...</div>
+                    </div>
+                    <button id="copy-studio" class="primary-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copy Source Code
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Category Database -->
+        <section class="database-section">
+            <div class="filter-nav" id="category-filters">
+                <!-- Injected via JS -->
+            </div>
+            
+            <div class="preset-grid" id="preset-grid">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+    </main>
+
+    <div id="toast-zone"></div>
+
+    <script type="module" src="nexus.js"></script>
+</body>
+</html>
