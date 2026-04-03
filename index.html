@@ -1,79 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fingo | Elite Bio Protocol</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Fingo Pro | Elite FF Name Studio</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts: Inter & Orbitron for futuristic touch -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #05070C;
+      color: #F5F0E8;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scroll */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #0F131C; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 20px; }
+
+    /* GOLD TEXT GRADIENT */
+    .gold-text {
+      background: linear-gradient(135deg, #F9E5B3 0%, #D4AF37 40%, #B27E1A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* HEADER – RAISTAR STYLE + BULLET STREAM */
+    .hero-ff {
+      position: relative;
+      width: 100%;
+      min-height: 340px;
+      background: linear-gradient(125deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format');
+      background-size: cover;
+      background-position: center 20%;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-ff::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: contrast(115%) brightness(92%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Animated bullet stream */
+    .bullet-stream {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .bullet {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: radial-gradient(circle, #FFE484, #D4AF37);
+      border-radius: 50%;
+      box-shadow: 0 0 14px #FFD966, 0 0 6px #B8860B;
+      opacity: 0.9;
+      animation: bulletShoot 1.5s linear infinite;
+    }
+    @keyframes bulletShoot {
+      0% { transform: translateX(-40px); opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(calc(100vw + 60px)); opacity: 0; }
+    }
+    .bullet:nth-child(1) { top: 18%; animation-duration: 1.2s; width: 5px; height: 5px; }
+    .bullet:nth-child(2) { top: 42%; animation-duration: 1.6s; animation-delay: 0.3s; width: 7px; height: 7px; background: radial-gradient(circle, #FFC107, #FF8C00);}
+    .bullet:nth-child(3) { top: 67%; animation-duration: 1.4s; animation-delay: 0.8s; }
+    .bullet:nth-child(4) { top: 88%; animation-duration: 1.9s; animation-delay: 0.2s; width: 4px; height: 4px; }
+    .bullet:nth-child(5) { top: 33%; animation-duration: 1.1s; animation-delay: 1.0s; }
+    .bullet:nth-child(6) { top: 55%; animation-duration: 1.7s; animation-delay: 0.5s; width: 6px; }
+    .bullet:nth-child(7) { top: 75%; animation-duration: 1.3s; animation-delay: 1.2s; }
+    .bullet:nth-child(8) { top: 10%; animation-duration: 2.0s; animation-delay: 0.05s; }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      padding: 1.8rem;
+    }
+    .hero-content h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 15px rgba(0,0,0,0.8);
+    }
+    .hero-content h1 span {
+      background: linear-gradient(135deg, #FFF0C0, #D4AF37, #AA771C);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-tag {
+      margin-top: 0.8rem;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.4rem 1.5rem;
+      border-radius: 60px;
+      border-left: 3px solid #D4AF37;
+      font-weight: 500;
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    /* GLASS LIVE PREVIEW */
+    .glass-preview {
+      background: rgba(8, 12, 20, 0.7);
+      backdrop-filter: blur(16px);
+      border-radius: 36px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 1.8rem 2rem;
+      margin-bottom: 2.8rem;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+      transition: all 0.2s;
+    }
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .identity {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .live-name {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #F9E0A0, #E4C15A, #C49B2A);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: 1px;
+    }
+    .vbadge {
+      background: linear-gradient(145deg, #D4AF37, #A57C1E);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #0A0C12;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 10px rgba(212,175,55,0.7);
+    }
+    .input-group {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .input-group input {
+      flex: 2;
+      background: #0E121D;
+      border: 1px solid #2A2F3E;
+      padding: 0.9rem 1.2rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      color: #F0EAD6;
+      font-weight: 500;
+      outline: none;
+      transition: 0.2s;
+    }
+    .input-group input:focus {
+      border-color: #D4AF37;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
+    }
+    .badge-note {
+      background: #11161F;
+      padding: 0.3rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: #CFB87C;
+    }
+
+    /* Generator Header */
+    .gen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 2rem 0 1.5rem 0;
+      border-left: 5px solid #D4AF37;
+      padding-left: 1rem;
+    }
+    .gen-header h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+    }
+    .counter-badge {
+      background: #0F131E;
+      padding: 0.3rem 1.2rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #E6D29F;
+    }
+
+    /* INFINITE GRID */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.2rem;
+    }
+    .style-card {
+      background: rgba(12, 17, 27, 0.8);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 26px;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      cursor: default;
+    }
+    .style-card:hover {
+      border-color: #D4AF37;
+      background: rgba(20, 28, 40, 0.95);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -8px black;
+    }
+    .style-text {
+      font-family: 'Courier New', monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+      word-break: break-word;
+      flex: 1;
+      color: #FFFAEA;
+      letter-spacing: 0.3px;
+    }
+    .copy-btn {
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      width: 42px;
+      height: 42px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #E5CF8B;
+      font-size: 1.2rem;
+    }
+    .copy-btn:hover {
+      background: #D4AF37;
+      color: #0A0C12;
+      transform: scale(1.05);
+      box-shadow: 0 0 8px #FFE484;
+    }
+
+    /* TOAST */
+    .toast-msg {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1A1F2C;
+      backdrop-filter: blur(20px);
+      padding: 0.7rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #D4AF37;
+      border: 1px solid #D4AF37;
+      z-index: 1000;
+      transition: opacity 0.2s;
+      opacity: 0;
+      pointer-events: none;
+      font-size: 0.9rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.8rem 0;
+      border-top: 1px solid #20232E;
+      color: #6B6F7C;
+      font-size: 0.8rem;
+    }
+    @media (max-width: 680px) {
+      .hero-content h1 { font-size: 2.2rem; }
+      .live-name { font-size: 1.5rem; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .glass-preview { padding: 1.2rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Immersive Background -->
-    <div class="cyber-grid"></div>
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
 
-    <header class="nexus-header">
-        <div class="brand">
-            <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>FIN<span class="badge">GO</span></span>
+<div class="hero-ff">
+  <div class="bullet-stream">
+    <div class="bullet"></div><div class="bullet"></div><div class="bullet"></div>
+    <div class="bullet"></div><div class="bullet"></div><div class="bullet"></div>
+    <div class="bullet"></div><div class="bullet"></div>
+  </div>
+  <div class="hero-content">
+    <h1><span>FINGO PRO</span> <span style="color:#D4AF37;">| ELITE</span></h1>
+    <p style="margin-top: 12px; max-width: 550px;">⚡ Infinite FF name generator • Real color codes • Raistar aura ⚡</p>
+    <div class="hero-tag">
+      <i class="fas fa-crown" style="color:#D4AF37;"></i> #1 PRO STYLING ENGINE 
+      <i class="fas fa-bolt"></i> 150+ combos / sec
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- GLASS PREVIEW -->
+  <div class="glass-preview">
+    <div class="preview-row">
+      <div class="identity">
+        <span class="live-name" id="livePreviewName">GHOST_FF</span>
+        <div class="vbadge"><i class="fas fa-check-circle"></i> VERIFIED V-BADGE</div>
+      </div>
+      <div class="badge-note"><i class="fas fa-code"></i> FF color codes active</div>
+    </div>
+    <div class="input-group">
+      <input type="text" id="playerNameInput" placeholder="Your IGN (supports color codes like [FF5] , [FF0000])" value="GHOST_FF" maxlength="30">
+      <div class="badge-note"><i class="fas fa-infinity"></i> infinite generator</div>
+    </div>
+  </div>
+
+  <div class="gen-header">
+    <h2><i class="fas fa-layer-group" style="color:#D4AF37;"></i> INFINITE STYLE GRID</h2>
+    <div class="counter-badge" id="styleCounter">🔥 generating combos...</div>
+  </div>
+  <div id="stylesGridContainer" class="styles-grid">
+    <!-- dynamic cards -->
+  </div>
+</div>
+
+<footer>
+  <i class="fas fa-diamond" style="color:#D4AF37;"></i> Fingo Pro • Premium FF Identity Suite • One-tap copy • 100% FF Color Codes + Rare Symbols
+</footer>
+<div id="copyToast" class="toast-msg"><i class="fas fa-copy"></i> COPIED TO CLIPBOARD</div>
+
+<script>
+  // ------------------- UNICODE FONT TRANSFORMATIONS -------------------
+  // 1. BOLD
+  const boldMap = {
+    'A':'𝐀','B':'𝐁','C':'𝐂','D':'𝐃','E':'𝐄','F':'𝐅','G':'𝐆','H':'𝐇','I':'𝐈','J':'𝐉','K':'𝐊','L':'𝐋','M':'𝐌','N':'𝐍','O':'𝐎','P':'𝐏','Q':'𝐐','R':'𝐑','S':'𝐒','T':'𝐓','U':'𝐔','V':'𝐕','W':'𝐖','X':'𝐗','Y':'𝐘','Z':'𝐙',
+    'a':'𝐚','b':'𝐛','c':'𝐜','d':'𝐝','e':'𝐞','f':'𝐟','g':'𝐠','h':'𝐡','i':'𝐢','j':'𝐣','k':'𝐤','l':'𝐥','m':'𝐦','n':'𝐧','o':'𝐨','p':'𝐩','q':'𝐪','r':'𝐫','s':'𝐬','t':'𝐭','u':'𝐮','v':'𝐯','w':'𝐰','x':'𝐱','y':'𝐲','z':'𝐳',
+    '0':'𝟎','1':'𝟏','2':'𝟐','3':'𝟑','4':'𝟒','5':'𝟓','6':'𝟔','7':'𝟕','8':'𝟖','9':'𝟗'
+  };
+  // 2. SCRIPT / CALLIGRAPHY
+  const scriptMap = {
+    'A':'𝒜','B':'ℬ','C':'𝒞','D':'𝒟','E':'ℰ','F':'ℱ','G':'𝒢','H':'ℋ','I':'ℐ','J':'𝒥','K':'𝒦','L':'ℒ','M':'ℳ','N':'𝒩','O':'𝒪','P':'𝒫','Q':'𝒬','R':'ℛ','S':'𝒮','T':'𝒯','U':'𝒰','V':'𝒱','W':'𝒲','X':'𝒳','Y':'𝒴','Z':'𝒵',
+    'a':'𝒶','b':'𝒷','c':'𝒸','d':'𝒹','e':'ℯ','f':'𝒻','g':'ℊ','h':'𝒽','i':'𝒾','j':'𝒿','k':'𝓀','l':'𝓁','m':'𝓂','n':'𝓃','o':'ℴ','p':'𝓅','q':'𝓆','r':'𝓇','s':'𝓈','t':'𝓉','u':'𝓊','v':'𝓋','w':'𝓌','x':'𝓍','y':'𝓎','z':'𝓏',
+    '0':'𝟢','1':'𝟣','2':'𝟤','3':'𝟥','4':'𝟦','5':'𝟧','6':'𝟨','7':'𝟩','8':'𝟪','9':'𝟫'
+  };
+  // 3. FRAKTUR / GOTHIC
+  const frakturMap = {
+    'A':'𝔄','B':'𝔅','C':'ℭ','D':'𝔇','E':'𝔈','F':'𝔉','G':'𝔊','H':'ℌ','I':'ℑ','J':'𝔍','K':'𝔎','L':'𝔏','M':'𝔐','N':'𝔑','O':'𝔒','P':'𝔓','Q':'𝔔','R':'ℜ','S':'𝔖','T':'𝔗','U':'𝔘','V':'𝔙','W':'𝔚','X':'𝔛','Y':'𝔜','Z':'ℨ',
+    'a':'𝔞','b':'𝔟','c':'𝔠','d':'𝔡','e':'𝔢','f':'𝔣','g':'𝔤','h':'𝔥','i':'𝔦','j':'𝔧','k':'𝔨','l':'𝔩','m':'𝔪','n':'𝔫','o':'𝔬','p':'𝔭','q':'𝔮','r':'𝔯','s':'𝔰','t':'𝔱','u':'𝔲','v':'𝔳','w':'𝔴','x':'𝔵','y':'𝔶','z':'𝔷',
+    '0':'𝕺','1':'𝕻','2':'𝟚','3':'𝟛','4':'𝟜','5':'𝟝','6':'𝟞','7':'𝟟','8':'𝟠','9':'𝟡'
+  };
+  // 4. DOUBLE-STRUCK (MATHEMATICAL)
+  const doubleMap = {
+    'A':'𝔸','B':'𝔹','C':'ℂ','D':'𝔻','E':'𝔼','F':'𝔽','G':'𝔾','H':'ℍ','I':'𝕀','J':'𝕁','K':'𝕂','L':'𝕃','M':'𝕄','N':'ℕ','O':'𝕆','P':'ℙ','Q':'ℚ','R':'ℝ','S':'𝕊','T':'𝕋','U':'𝕌','V':'𝕍','W':'𝕎','X':'𝕏','Y':'𝕐','Z':'ℤ',
+    'a':'𝕒','b':'𝕓','c':'𝕔','d':'𝕕','e':'𝕖','f':'𝕗','g':'𝕘','h':'𝕙','i':'𝕚','j':'𝕛','k':'𝕜','l':'𝕝','m':'𝕞','n':'𝕟','o':'𝕠','p':'𝕡','q':'𝕢','r':'𝕣','s':'𝕤','t':'𝕥','u':'𝕦','v':'𝕧','w':'𝕨','x':'𝕩','y':'𝕪','z':'𝕫',
+    '0':'𝟘','1':'𝟙','2':'𝟚','3':'𝟛','4':'𝟜','5':'𝟝','6':'𝟞','7':'𝟟','8':'𝟠','9':'𝟡'
+  };
+  // 5. MONOSPACE (Mathematical Monospace)
+  const monoMap = {
+    'A':'𝙰','B':'𝙱','C':'𝙲','D':'𝙳','E':'𝙴','F':'𝙵','G':'𝙶','H':'𝙷','I':'𝙸','J':'𝙹','K':'𝙺','L':'𝙻','M':'𝙼','N':'𝙽','O':'𝙾','P':'𝙿','Q':'𝚀','R':'𝚁','S':'𝚂','T':'𝚃','U':'𝚄','V':'𝚅','W':'𝚆','X':'𝚇','Y':'𝚈','Z':'𝚉',
+    'a':'𝚊','b':'𝚋','c':'𝚌','d':'𝚍','e':'𝚎','f':'𝚏','g':'𝚐','h':'𝚑','i':'𝚒','j':'𝚓','k':'𝚔','l':'𝚕','m':'𝚖','n':'𝚗','o':'𝚘','p':'𝚙','q':'𝚚','r':'𝚛','s':'𝚜','t':'𝚝','u':'𝚞','v':'𝚟','w':'𝚠','x':'𝚡','y':'𝚢','z':'𝚣',
+    '0':'𝟶','1':'𝟷','2':'𝟸','3':'𝟹','4':'𝟺','5':'𝟻','6':'𝟼','7':'𝟽','8':'𝟾','9':'𝟿'
+  };
+
+  function applyFontStyle(str, fontType) {
+    let map;
+    if (fontType === 'bold') map = boldMap;
+    else if (fontType === 'script') map = scriptMap;
+    else if (fontType === 'fraktur') map = frakturMap;
+    else if (fontType === 'double') map = doubleMap;
+    else if (fontType === 'mono') map = monoMap;
+    else return str;
+    return str.split('').map(ch => map[ch] || ch).join('');
+  }
+
+  // ---------- RARE SYMBOLS & FF COLOR CODES ----------
+  const SYMBOLS_PRE = ["✦","✧","⚔️","🔥","♛","★","✪","⌘","❖","⛧","♦","⭑","꧁","༺","☠️","✨","⚡","👑","🜁","🜂","⛤","✧༺"];
+  const SYMBOLS_SUF = ["✦","✧","⚔️","🔥","♛","★","✪","⌘","❖","⛧","♦","⭑","꧂","༻","☠️","✨","⚡","👑","🜂","🜁","⛤","༻✧"];
+  
+  // Free Fire supported color codes + premium bic style (competitor edge)
+  const COLOR_CODES = [
+    "", "[FF0000]", "[00FF00]", "[0000FF]", "[FFFF00]", "[FF00FF]", "[00FFFF]", 
+    "[FFA500]", "[FF5]", "[DC143C]", "[B22222]", "[880000]", "[FF4040]", "[FF4500]",
+    "[bic100FFFOFF]", "[C9A03D]", "[FFD700]", "[9400D3]", "[2E8B57]"
+  ];
+  
+  // additional stylish brackets
+  const BRACKET_STYLES = ["", "『", "【", "《", "»", "⟪", "⌈"];
+  const BRACKET_CLOSE = ["", "』", "】", "》", "«", "⟫", "⌉"];
+
+  // fonts list (6 variations)
+  const FONT_TYPES = ['none', 'bold', 'script', 'fraktur', 'double', 'mono'];
+
+  // generate infinite combos (unique, up to 140 high-quality styles)
+  function generateEliteStyles(baseRaw) {
+    if (!baseRaw.trim()) baseRaw = "PROPLAYER";
+    let baseClean = baseRaw.trim();
+    let stylesSet = new Set();
+    let results = [];
+
+    // sample limited to avoid explosion but keep variety (10 prefixes, 10 suffixes, 6 fonts, 12 colors = 7200 theoretical but we limit)
+    let preSample = SYMBOLS_PRE.slice(0, 10);
+    let sufSample = SYMBOLS_SUF.slice(0, 10);
+    let colorSample = COLOR_CODES.slice(0, 14); // most popular
+    let bracketSample = BRACKET_STYLES.slice(0, 5);
+    
+    // 1) generate primary combos: font + prefix + suffix + color
+    for (let f of FONT_TYPES) {
+      let styledName = f === 'none' ? baseClean : applyFontStyle(baseClean, f);
+      for (let pre of preSample) {
+        for (let suf of sufSample) {
+          for (let col of colorSample) {
+            let variant = col + pre + styledName + suf;
+            if (!stylesSet.has(variant) && results.length < 150) {
+              stylesSet.add(variant);
+              results.push(variant);
+            }
+            if (results.length >= 150) break;
+          }
+          if (results.length >= 150) break;
+        }
+        if (results.length >= 150) break;
+      }
+      if (results.length >= 150) break;
+    }
+    
+    // 2) add bracket-styled versions for extra uniqueness
+    for (let i=0; i<bracketSample.length && results.length < 170; i++) {
+      let openB = bracketSample[i];
+      let closeB = BRACKET_CLOSE[i] || "";
+      if (!openB) continue;
+      for (let f of FONT_TYPES.slice(0,4)) {
+        let inner = f === 'none' ? baseClean : applyFontStyle(baseClean, f);
+        let col = COLOR_CODES[Math.floor(Math.random() * COLOR_CODES.length)];
+        let finalName = col + openB + inner + closeB;
+        if (!stylesSet.has(finalName)) {
+          stylesSet.add(finalName);
+          results.push(finalName);
+        }
+        if (results.length >= 170) break;
+      }
+    }
+    
+    // 3) add rare mix with double symbols & premium bic code emphasis
+    const premiumEffects = ["[bic100FFFOFF]", "[FFD700]"];
+    for (let effect of premiumEffects) {
+      for (let f of ['bold', 'fraktur', 'script']) {
+        let fancyName = applyFontStyle(baseClean, f);
+        let symPre = SYMBOLS_PRE[Math.floor(Math.random() * SYMBOLS_PRE.length)];
+        let symSuf = SYMBOLS_SUF[Math.floor(Math.random() * SYMBOLS_SUF.length)];
+        let combo = effect + symPre + fancyName + symSuf;
+        if (!stylesSet.has(combo) && results.length < 180) results.push(combo);
+      }
+    }
+    
+    // 4) add simple color-coded raw names for utility
+    let simpleColors = ["[FF5]", "[FF0000]", "[00FF00]", "[bic100FFFOFF]"];
+    for (let sc of simpleColors) {
+      let variant = sc + baseClean;
+      if (!stylesSet.has(variant) && results.length < 190) results.push(variant);
+    }
+    
+    // final slice up to 160
+    results = results.slice(0, 158);
+    return results;
+  }
+
+  // ------ RENDER GRID & COPY LOGIC ------
+  let currentStyleList = [];
+
+  function renderStylesGrid(stylesArr) {
+    const container = document.getElementById('stylesGridContainer');
+    const counterSpan = document.getElementById('styleCounter');
+    if (!container) return;
+    if (!stylesArr.length) {
+      container.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; background:rgba(0,0,0,0.4); border-radius:2rem;">✨ type your IGN to generate 100+ elite styles ✨</div>`;
+      counterSpan.innerText = `0 styles`;
+      return;
+    }
+    let html = '';
+    for (let style of stylesArr) {
+      // escape for safety but preserve color codes and symbols
+      let safeText = escapeHtmlEntities(style);
+      html += `
+        <div class="style-card">
+          <div class="style-text" title="${safeText}">${safeText}</div>
+          <div class="copy-btn" data-copy="${escapeAttr(style)}">
+            <i class="fas fa-copy"></i>
+          </div>
         </div>
-    </header>
-
-    <main class="nexus-workspace">
-        <!-- Core Feature: The Live Studio -->
-        <section class="studio-section glass-panel">
-            <div class="panel-header">
-                <h2>Bio Code Studio</h2>
-                <p>Inject hex codes and modifiers for real-time game rendering.</p>
-            </div>
-            
-            <div class="studio-grid">
-                <!-- Input Area -->
-                <div class="editor-area">
-                    <div class="toolbar">
-                        <button class="tool-btn" data-inject="[b]" title="Bold">B</button>
-                        <button class="tool-btn" data-inject="[i]" title="Italic">I</button>
-                        <button class="tool-btn" data-inject="[c]" title="Center">C</button>
-                        <div class="divider"></div>
-                        <button class="tool-btn color-btn" data-inject="[00FFFF]" style="color: #00FFFF;">Cyan</button>
-                        <button class="tool-btn color-btn" data-inject="[FF0000]" style="color: #FF0000;">Red</button>
-                        <button class="tool-btn color-btn" data-inject="[FFD700]" style="color: #FFD700;">Gold</button>
-                    </div>
-                    <textarea id="bio-input" placeholder="e.g., [b][c][00FFFF]ESPORTS PLAYER&#10;[FF0000]100% HEADSHOT"></textarea>
-                </div>
-
-                <!-- Output Area -->
-                <div class="render-area">
-                    <div class="render-header">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" width="16"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                        <span>Live Engine Preview</span>
-                    </div>
-                    <div class="game-display">
-                        <div id="live-preview">Your output will appear here...</div>
-                    </div>
-                    <button id="copy-studio" class="primary-btn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                        Copy Source Code
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dynamic Category Database -->
-        <section class="database-section">
-            <div class="filter-nav" id="category-filters">
-                <!-- Injected via JS -->
-            </div>
-            
-            <div class="preset-grid" id="preset-grid">
-                <!-- Injected via JS -->
-            </div>
-        </section>
-    </main>
-
-    <div id="toast-zone"></div>
-
-    <script type="module" src="nexus.js"></script>
+      `;
+    }
+    container.innerHTML = html;
+    counterSpan.innerHTML = `<i class="fas fa-bolt"></i> ${stylesArr.length} PREMIUM STYLES`;
+    
+    // attach copy events
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const textToCopy = btn.getAttribute('data-copy');
+        navigator.clipboard.writeText(textToCopy).then(() => {
+          showToastMessage();
+        }).catch(() => alert("tap to copy manually"));
+      });
+    });
+  }
+  
+  function escapeHtmlEntities(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+  function escapeAttr(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  
+  let toastTimeout;
+  function showToastMessage() {
+    const toast = document.getElementById('copyToast');
+    if (!toast) return;
+    toast.style.opacity = '1';
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => { toast.style.opacity = '0'; }, 1500);
+  }
+  
+  // Update live preview + regenerate styles
+  let debounceUpdate;
+  function refreshAll() {
+    const inputField = document.getElementById('playerNameInput');
+    let rawVal = inputField.value.trim();
+    if (rawVal === "") rawVal = "PROPLAYER";
+    // update live preview name (raw display)
+    const liveSpan = document.getElementById('livePreviewName');
+    if (liveSpan) liveSpan.innerText = rawVal;
+    
+    // generate styles based on raw name
+    const generated = generateEliteStyles(rawVal);
+    currentStyleList = generated;
+    renderStylesGrid(currentStyleList);
+  }
+  
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    const nameInput = document.getElementById('playerNameInput');
+    if (nameInput) {
+      nameInput.addEventListener('input', () => {
+        clearTimeout(debounceUpdate);
+        debounceUpdate = setTimeout(() => {
+          refreshAll();
+        }, 70);
+      });
+    }
+    refreshAll();
+  });
+</script>
 </body>
 </html>
